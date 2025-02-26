@@ -38,7 +38,7 @@ public class TerminalOperations {
         String sentence = "Hello World";
         System.out.println("No of occurrence of 'l' in sentence " + sentence.chars().filter(x -> x == 'l').count());
 
-        System.out.println("Second highest is " + numbers.stream().sorted((a, b) -> b - a).skip(1).limit(1).toList());
+        System.out.println("Second highest is number " + numbers.stream().sorted((a, b) -> b - a).skip(1).limit(1).toList());
 
 //      7.max ,min
         System.out.println("max is " + numbers.stream().max(Comparator.naturalOrder()).get());
