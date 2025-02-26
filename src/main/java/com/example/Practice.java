@@ -2,6 +2,7 @@ package com.example;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Practice {
@@ -21,17 +22,24 @@ public class Practice {
         System.out.println("Count String start with 'A' " + alpha.stream().filter(e -> e.toUpperCase().startsWith("A")).count());
 
 //       5. Find Maximum and Minimum Numbers
-        System.out.println("Max in the List is " + number.stream().max(Integer::compareTo).get());
-        System.out.println("Min in this List is " + number.stream().min(Integer::compareTo).get());
+        System.out.println("Max in the List is " + number.stream().max(Integer::compareTo).isPresent());
+        System.out.println("Min in this List is " + number.stream().min(Integer::compareTo).isPresent());
 
-//       6.Sum of Squares of Odd Numbers
-        System.out.println("Sum of Squares of Odd Numbers " + number.stream().filter(x -> x % 2 != 0).map(x -> x * x).reduce(Integer::sum).get());
+//       6. Sum of Squares of Odd Numbers
+        System.out.println("Sum of Squares of Odd Numbers " + number.stream().filter(x -> x % 2 != 0).map(x -> x * x).reduce(Integer::sum).isPresent());
 
-//       7.Remove Duplicates from a List
-        System.out.println("Remove Duplicates from a List" + alpha.stream().distinct().toList());
+//       7. Remove Duplicates from a List
+        System.out.println("Remove Duplicates from a List " + alpha.stream().distinct().toList());
 
-//        8.Find Second-Highest Number
-        System.out.println("Find Second Highest Number " + number.stream().sorted(Comparator.naturalOrder()).skip(1).limit(1).findFirst().get());
+//       8. Find Second-Highest Number
+        System.out.println("Find Second Highest Number " + number.stream().sorted(Comparator.naturalOrder()).skip(1).limit(1).findFirst().isPresent());
 
+//       9. Average of all numbers
+        System.out.println("Average calculate using Collector " + number.stream().collect(Collectors.averagingInt(x -> x)));
+        System.out.println("Average is calculate using " + number.stream().mapToInt(x -> x).average().isPresent());
+
+//       10. first find the square the  no should be greater than 100 then remove the average;
+        List<Integer> integers = List.of(1, 10, 20, 30, 15);
+        System.out.println("Number Square Average "+integers.stream().map(x -> x * x).filter(x -> x > 100).mapToInt(x -> x).average().isPresent());
     }
 }
