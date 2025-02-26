@@ -3,7 +3,7 @@ package com.example;
 import java.util.List;
 import java.util.function.*;
 
-public class Main {
+public class BasicOfStreams {
     public static void main(String[] args) {
 
         // functional programming
