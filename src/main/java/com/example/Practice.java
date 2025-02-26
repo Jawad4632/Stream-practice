@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +41,11 @@ public class Practice {
 
 //       10. first find the square the  no should be greater than 100 then remove the average;
         List<Integer> integers = List.of(1, 10, 20, 30, 15);
-        System.out.println("Number Square Average "+integers.stream().map(x -> x * x).filter(x -> x > 100).mapToInt(x -> x).average().isPresent());
+        System.out.println("Number Square Average " + integers.stream().map(x -> x * x).filter(x -> x > 100).mapToInt(x -> x).average().isPresent());
+
+//       11. Print Duplicate Numbers using Streams
+        List<Integer> duplicate = List.of(1, 3, 10, 20, 30, 15, 1, 13, 1, 2, 2, 10, 30, 19, 3);
+        System.out.println("Print Duplicate Numbers using Streams " + duplicate.stream().filter(e -> Collections.frequency(duplicate, e) > 1).collect(Collectors.toSet()));
+
     }
 }
