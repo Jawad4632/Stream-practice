@@ -47,5 +47,9 @@ public class Practice {
         List<Integer> duplicate = List.of(1, 3, 10, 20, 30, 15, 1, 13, 1, 2, 2, 10, 30, 19, 3);
         System.out.println("Print Duplicate Numbers using Streams " + duplicate.stream().filter(e -> Collections.frequency(duplicate, e) > 1).collect(Collectors.toSet()));
 
+//       12. Use the Stream API to reverse the list and perform subtraction of all numbers in a given list.
+        System.out.println("Converting List into reverse order and performing subtraction operation "+integers.stream().sorted(Collections.reverseOrder()).reduce((a,b)->a-b).get());
+
+
     }
 }
