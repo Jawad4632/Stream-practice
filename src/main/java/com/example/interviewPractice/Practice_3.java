@@ -17,6 +17,13 @@ public class Practice_3 {
 
 
 //➡️ Reverse Each Word of String using Java 8 Stream
+        String str = "java is a good programming language";
+        List<String> list3 = Arrays.stream(str.split(" "))
+                .map(x -> new StringBuilder(x).reverse().toString())
+                .toList();
+
+        System.out.println("String in reverse order "+list3);
+
 //➡️ Java 8 Program to Find the Second Largest Number in the List of Integers
         List<Integer> numbers = Arrays.asList(12, 45, 1, 33, 45, 7, 99, 102, 99);
         Integer i = numbers.stream()
@@ -39,7 +46,6 @@ public class Practice_3 {
                 .min(Comparator.comparingInt(Integer::intValue));
         System.out.println("Min value is "+min.orElse(null));
 
-//➡️ Sort Employee Objects by Salary using Lambda
 //➡️ Java 8 Program to Find the Sum of All Digits of a Number
       int number = 820848662;
         int sum = String.valueOf(number)
@@ -92,24 +98,24 @@ public class Practice_3 {
 
 //➡️ Collectors groupingBy - Group Employees By Age
         List<Employee> employees = Arrays.asList(
-                new Employee("Alice", 25, LocalDate.of(1999, 6, 15)),
-                new Employee("Bob", 30, LocalDate.of(1994, 3, 22)),
-                new Employee("Charlie", 25, LocalDate.of(1999, 8, 10)),
-                new Employee("David", 35, LocalDate.of(1989, 11, 5)),
-                new Employee("Eve", 30, LocalDate.of(1994, 1, 30)),
-                new Employee("Frank", 40, LocalDate.of(1984, 9, 12))
+                new Employee("Alice", 25, LocalDate.of(1999, 6, 15),30000),
+                new Employee("Bob", 30, LocalDate.of(1994, 3, 22),23000),
+                new Employee("Charlie", 25, LocalDate.of(1999, 8, 10),80000),
+                new Employee("David", 35, LocalDate.of(1989, 11, 5),780000),
+                new Employee("Eve", 30, LocalDate.of(1994, 1, 30),7000),
+                new Employee("Frank", 40, LocalDate.of(1984, 9, 12),400000)
         );
 
         Map<Integer, List<Employee>> collect3 = employees.stream()
-                .collect(Collectors.groupingBy(e -> e.age));
+                .collect(Collectors.groupingBy(Employee::getAge));
 
         System.out.println("Group By Age"+collect3);
 //➡️ Java 8 Program to Find the Age of a Person if the Birthday Date has Given
         String birthDate = "1994-01-30";
               employees.stream()
-                .filter(x -> x.birthDate.equals(LocalDate.parse(birthDate)))
+                .filter(x -> x.getBirthDate().equals(LocalDate.parse(birthDate)))
                 .findFirst()
-                .ifPresentOrElse(e->System.out.println(e.name+" "+e.age),
+                .ifPresentOrElse(e->System.out.println(e.getName()+" "+e.getAge()),
                         ()->System.out.println("No employee found with this birth date.")
                 );
 //➡️ Sort the List of Strings in Ascending and Descending Order using Java 8 Stream
@@ -123,6 +129,13 @@ public class Practice_3 {
                 .sorted(Comparator.naturalOrder())
                 .toList();
         System.out.println("Ascending order is "+list2);
+
+//➡️ Sort Employee Objects by Salary using Lambda
+        List<Employee> list4 = employees.stream()
+                .sorted(Comparator.comparing(Employee::getSalary))
+                .toList();
+        System.out.println("In sorted order order is "+list4);
+
 
     }
 }
