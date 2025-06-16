@@ -1,5 +1,6 @@
 package com.example.interviewPractice;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +42,18 @@ public class Practice_4 {
                 .filter(word-> word.length()>=10)
                 .findFirst()
                 .ifPresentOrElse(System.out::println,()->System.out.println("Unknown"));
+//  Given is the List of employee show first 2 digit of salary and remaining with ****
+        List<Employee> employees = Arrays.asList(
+                new Employee("Alice", 25, LocalDate.of(1999, 6, 15),30000),
+                new Employee("Bob", 30, LocalDate.of(1994, 3, 22),23000),
+                new Employee("Charlie", 25, LocalDate.of(1999, 8, 10),80000),
+                new Employee("David", 35, LocalDate.of(1989, 11, 5),780000),
+                new Employee("Eve", 30, LocalDate.of(1994, 1, 30),7000),
+                new Employee("Frank", 40, LocalDate.of(1984, 9, 12),400000)
+        );
+
+        employees.stream()
+                .map(e-> String.valueOf(e.getSalary()).substring(0,2).concat("*****"))
+                .forEach(System.out::println);
     }
 }
