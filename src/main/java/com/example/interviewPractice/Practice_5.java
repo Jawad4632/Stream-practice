@@ -142,10 +142,35 @@ public class Practice_5 {
                 .ifPresent(emp -> System.out.println(emp.getKey()));
 
 //    For each department, list the employees whose salary is above the department’s average. Return a Map<String, List<Employee>>.
+        System.out.println("==========================================================================================");
+        Map<String, List<Employees>> SalaryGreaterThenAverage = employees.stream().collect(Collectors.groupingBy(Employees::getDepartment, Collectors.collectingAndThen(Collectors.toList(), list ->
+                        {
+                            double avg = list.stream().collect(Collectors.averagingDouble(Employees::getSalary));
+                            return list.stream().filter(e -> e.getSalary() > avg)
+                                    .toList();
+                        }
+                ))
+        );
+        System.out.println(SalaryGreaterThenAverage);
+
 
 //    Flatten all employee names into a single List<String> and sort them alphabetically using Streams.
+        List<String> sorted = employees.stream().
+                map(Employees::getName)
+                .sorted()
+                .toList();
+        System.out.println(sorted);
 
 //    For each department, compute and return a custom summary: Map<String, String> Where each value is a formatted string like: "Count: X, Total Salary: Y, Average Salary: Z"
+        Map<String, String> Summary = employees.stream().
+                collect(Collectors.groupingBy(Employees::getDepartment, Collectors.collectingAndThen(Collectors.toList(), list ->
+                        {
+                            Double salary = list.stream().collect(Collectors.summingDouble(Employees::getSalary));
+                            return String.format("Count: %d, Total Salary: %.2f, Average Salary: %.2f", list.size(), salary, salary / list.size());
+                        })
+                ));
+
+        System.out.println(Summary);
 
     }
 
